@@ -1,19 +1,39 @@
 """
-Main cli or app entry point
+Main CLI or app entry point
 """
 
-from mylib.calculator import add
-import click
+from mylib.lib import (
+    extract,
+    load_data,
+    describe,
+    query,
+    example_transform,
+    start_spark,
+    end_spark,
+)
 
-#var=1;var=2
 
-@click.command("add")
-@click.argument("a", type=int)
-@click.argument("b", type=int)
-def add_cli(a, b):
-    click.echo(add(a, b))
+def main():
+    # Extract data
+    extract()
+    # Start Spark session
+    spark = start_spark("DrinksDataAnalysis")
+    # Load data into DataFrame
+    df = load_data(spark)
+    # Example metrics
+    describe(df)
+    # Query
+    query(
+        spark,
+        df,
+        "SELECT country, beer_servings, total_litres_of_pure_alcohol FROM Drinks WHERE beer_servings > 100",
+        "Drinks",
+    )
+    # Example transform
+    example_transform(df)
+    # End Spark session
+    end_spark(spark)
 
 
 if __name__ == "__main__":
-    # pylint: disable=no-value-for-parameter
-    add_cli()
+    main()
