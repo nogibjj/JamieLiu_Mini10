@@ -2,7 +2,14 @@ import os
 import requests
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import when, col
-from pyspark.sql.types import StructType, StructField, IntegerType, StringType
+from pyspark.sql.types import (
+    StructType,
+    StructField,
+    IntegerType,
+    StringType,
+    FloatType
+)
+
 
 LOG_FILE = "pyspark_output.md"
 
