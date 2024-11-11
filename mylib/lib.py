@@ -45,7 +45,7 @@ def load_data(spark, data="data/drinks.csv", name="Drinks"):
         StructField("beer_servings", IntegerType(), True),
         StructField("spirit_servings", IntegerType(), True),
         StructField("wine_servings", IntegerType(), True),
-        StructField("total_litres_of_pure_alcohol", IntegerType(), True)
+        StructField("total_litres_of_pure_alcohol", FloatType(), True)
     ])
 
     df = spark.read.option("header", "true").schema(schema).csv(data)
