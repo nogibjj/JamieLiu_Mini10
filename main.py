@@ -23,10 +23,15 @@ def main():
     # Example metrics
     describe(df)
     # Query
+    sql_query = (
+        "SELECT country, beer_servings, total_litres_of_pure_alcohol "
+        "FROM Drinks "
+        "WHERE beer_servings > 100"
+    )
     query(
         spark,
         df,
-        "SELECT country, beer_servings, total_litres_of_pure_alcohol FROM Drinks WHERE beer_servings > 100",
+        sql_query,
         "Drinks",
     )
     # Example transform

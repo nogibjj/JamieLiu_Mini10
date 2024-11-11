@@ -68,9 +68,12 @@ def describe(df):
 def example_transform(df):
     """Example transformation on the drinks dataset"""
     # Example: Categorizing countries based on beer servings
-    df = df.withColumn("alcohol_category", when(col("beer_servings") > 100, "High Beer")
-                                            .when(col("beer_servings") > 50, "Moderate Beer")
-                                            .otherwise("Low Beer"))
+    df = df.withColumn(
+        "alcohol_category",
+        when(col("beer_servings") > 100, "High Beer")
+        .when(col("beer_servings") > 50, "Moderate Beer")
+        .otherwise("Low Beer")
+    )
     log_output("transform data", df.limit(10).toPandas().to_markdown())
     return df.show()
 

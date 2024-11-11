@@ -41,19 +41,21 @@ def test_describe(spark):
 
 def test_query(spark):
     df = load_data(spark)
-    result = query(
-        spark,
-        df,
-        "SELECT country, beer_servings, total_litres_of_pure_alcohol FROM Drinks WHERE beer_servings > 100",
-        "Drinks"
+    query_str = (
+        "SELECT country, beer_servings, total_litres_of_pure_alcohol "
+        "FROM Drinks "
+        "WHERE beer_servings > 100"
     )
+    result = query(spark, df, query_str, "Drinks")
     assert result is None  # Assuming `query` logs the output without returning
 
 
 def test_example_transform(spark):
     df = load_data(spark)
     result = example_transform(df)
-    assert result is None  # Assuming `example_transform` logs the output without returning
+    assert (
+        result is None
+    )  # Assuming `example_transform` logs the output without returning
 
 
 if __name__ == "__main__":
@@ -62,4 +64,3 @@ if __name__ == "__main__":
     test_describe(spark)
     test_query(spark)
     test_example_transform(spark)
-
